@@ -1,0 +1,20 @@
+spring:
+  main:
+    banner-mode: console
+
+# Port
+server:
+  port: 9090
+  servlet:
+    context-path: /
+
+# Client Customer Api
+client:
+    registration-api:
+      url: https://5f457088e165a60016ba8cbc.mockapi.io
+      uri:
+        api: /api/v1/customer
+    registration-atomic:
+      url: http://localhost:8080
+      uri:
+        customer: /api/v1/customer-registration
