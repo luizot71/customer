@@ -3,18 +3,21 @@ package com.br.project.customer.registration.client;
 import com.br.project.customer.registration.domain.response.CustomerRegistrationResponse;
 import com.br.project.customer.registration.handler.CustomerRegistrationErrorCode;
 import com.br.project.customer.registration.handler.exceptions.BusinessException;
-import com.sun.net.httpserver.Headers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -66,8 +69,10 @@ public class CustomerRegistrationClient {
 
         for (var id : request) {
             if (response.getStatusCode() != HttpStatus.CREATED) {
-                LOGGER.error(String.format("Error at communication with Atomic microservice - Id[%d]", id.getId()));
-
+                for (var cd : response.getBody()) {
+                    id.setId(cd.getId());
+                    LOGGER.error(String.format("Error at communication with Atomic microservice - Id[%d]", id.getId()));
+                }
                 throw new BusinessException(CustomerRegistrationErrorCode.errorProcessingGetValuesFromAtomic);
             }
         }

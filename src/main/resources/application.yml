@@ -15,6 +15,6 @@ client:
       uri:
         api: /api/v1/customer
     registration-atomic:
-      url: http://localhost:8080
+      url: http://localhost:8085
       uri:
-        customer: /api/v1/customer-registration
+        customer: /api/v1/atomic-database

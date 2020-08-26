@@ -32,7 +32,7 @@ public class SchedulingTask {
     @Scheduled(fixedDelay = MINUTO * 10, zone = TIME_ZONE)
     public void run() {
         try {
-            this.servive.getCustomerRegistrationService();
+            //this.servive.getCustomerRegistrationService();
 
             log.info("Scheduler search values on Customer Api and insert values on Atomic database, {}", dateFormat.format(new Date()));
         }catch (Exception e) {

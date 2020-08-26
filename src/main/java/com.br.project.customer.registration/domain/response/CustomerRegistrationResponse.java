@@ -1,6 +1,5 @@
 package com.br.project.customer.registration.domain.response;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
@@ -11,7 +10,7 @@ public class CustomerRegistrationResponse implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @JsonIgnore
+    @JsonProperty("id")
     private long id;
 
     @JsonProperty("name")
